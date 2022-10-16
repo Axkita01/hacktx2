@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 import os
@@ -84,9 +84,9 @@ def location():
         db.session.commit()
         return "Location added"
 
-    if request.method == 'PUT':
+    if request.method == 'PUT' or request.method == 'OPTIONS':
         r = request.get_json()
-        response = flask.make_response()
+        response = make_response()
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "*")
