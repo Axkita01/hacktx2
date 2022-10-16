@@ -83,12 +83,14 @@ def location():
         db.session.add(new_location)
         db.session.commit()
         return "Location added"
+        
     if request.method == 'OPTIONS':
         response = make_response()
         response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add('Access-Control-Allow-Headers', "*")
         response.headers.add('Access-Control-Allow-Methods', "*")
         return response
+        
     if request.method == 'PUT':
         r = request.get_json()
         if 'comment' in r:        
@@ -123,6 +125,13 @@ def location():
         except:
             raise Exception("Location not found")
     return "Default"
+    
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
 
 if __name__ == "__main__":
     app.run()
