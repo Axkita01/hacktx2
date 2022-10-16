@@ -11,7 +11,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 CORS(app, supports_credentials=True)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 class Locations(db.Model):
     name = db.Column(db.String(30), primary_key=True)
@@ -53,12 +52,10 @@ with app.app_context():
     db.create_all()
     
         
-@cross_origin(supports_credentials=True)  
 @app.route("/")
 def show_all():
     return {"locations": [location.serialize for location in Locations.query.all() if location is not None]}
 
-@cross_origin(supports_credentials=True)
 @app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def location():
     if request.method == 'OPTIONS':
