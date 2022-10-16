@@ -12,4 +12,3 @@ SQLAlchemy==1.4.41
 Werkzeug==2.2.2
 PyMySQL==1.0.2
 gevent==21.8.0
-gevent.pywsgi==1.1.0
