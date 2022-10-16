@@ -14,13 +14,13 @@ CORS(app, supports_credentials=True)
 
 class Locations(db.Model):
     name = db.Column(db.String(30), primary_key=True)
-    description = db.Column(db.String)
-    image = db.Column(db.String)
+    description = db.Column(db.String(250))
+    image = db.Column(db.String(150))
     x = db.Column(db.Float)
     y = db.Column(db.Float)
     total_rating = db.Column(db.Float)
     count = db.Column(db.Integer)
-    category = db.Column(db.String)
+    category = db.Column(db.String(50))
     comments = db.Column(db.JSON)
 
     def __init__(self, name, description, image, x, y, total_rating, count, category, comments):
