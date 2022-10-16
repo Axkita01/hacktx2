@@ -50,12 +50,13 @@ class Locations(db.Model):
 
 with app.app_context():
     db.create_all()
-    
+@cross_origin(supports_credentials=True)  
 @app.route("/")
 def show_all():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return {"locations": [location.serialize for location in Locations.query.all() if location is not None]}
 
+@cross_origin(supports_credentials=True)
 @app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def location():
     response.headers.add('Access-Control-Allow-Origin', '*')
