@@ -83,7 +83,12 @@ def location():
         db.session.add(new_location)
         db.session.commit()
         return "Location added"
-
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
     if request.method == 'PUT':
         r = request.get_json()
         if 'comment' in r:        
