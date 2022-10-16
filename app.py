@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 import os
@@ -11,8 +11,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 CORS(app, supports_credentials=True)
-app.config["CORS_SUPPORTS_CREDENTIALS"] = True
-app.config['CORS_HEADERS'] = 'Content-Type'
 
 class Locations(db.Model):
     name = db.Column(db.String(30), primary_key=True)
@@ -52,6 +50,12 @@ class Locations(db.Model):
 
 with app.app_context():
     db.create_all()
+    
+@current_app.before_request
+def basic_authentication():
+    if request.method.lower() == 'options':
+        return Response()
+        
 @cross_origin(supports_credentials=True)  
 @app.route("/")
 def show_all():
