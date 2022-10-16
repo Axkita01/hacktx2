@@ -11,8 +11,8 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 CORS(app, supports_credentials=True)
-app.config[‘CORS_ORIGINS’] = ['*'] 
-app.config[‘CORS_HEADERS’] = ['Content-Type']
+app.config['CORS_ORIGINS'] = ['*']
+app.config['CORS_HEADERS'] = ['Content-Type']
 
 class Locations(db.Model):
     name = db.Column(db.String(30), primary_key=True)
