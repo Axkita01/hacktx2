@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("api_link")
 db = SQLAlchemy(app)
 db.init_app(app)
-
+print('hi')
 CORS(app, supports_credentials=True)
 
 class Locations(db.Model):
@@ -56,7 +56,7 @@ with app.app_context():
 def show_all():
     return {"locations": [location.serialize for location in Locations.query.all() if location is not None]}
 
-@app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
+@app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'])
 def location():
     if request.method == 'OPTIONS':
         response = Response()
