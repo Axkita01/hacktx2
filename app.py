@@ -51,7 +51,7 @@ class Locations(db.Model):
 with app.app_context():
     db.create_all()
     
-@current_app.before_request
+@app.before_request
 def basic_authentication():
     if request.method.lower() == 'options':
         return Response()
