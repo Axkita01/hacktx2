@@ -58,11 +58,6 @@ def show_all():
 @cross_origin(supports_credentials=True)
 @app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def location():
-    if request.method == 'OPTIONS':
-         return {'Allow' : 'PUT' }, 200, \
-    { 'Access-Control-Allow-Origin': '*', \
-      'Access-Control-Allow-Methods' : 'PUT,GET' }
-      
     if request.method == 'GET':
         r = request.get_json()
         try:
@@ -123,13 +118,7 @@ def location():
         except:
             raise Exception("Location not found")
     return "Default"
-    
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', '*')
-    response.headers.add('Access-Control-Allow-Methods', '*')
-    return response
+   
 
 if __name__ == "__main__":
     app.run()
