@@ -53,13 +53,11 @@ with app.app_context():
 @cross_origin(supports_credentials=True)  
 @app.route("/")
 def show_all():
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return {"locations": [location.serialize for location in Locations.query.all() if location is not None]}
 
 @cross_origin(supports_credentials=True)
 @app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def location():
-    response.headers.add('Access-Control-Allow-Origin', '*')
     if request.method == 'GET':
         r = request.get_json()
         try:
@@ -88,7 +86,6 @@ def location():
 
     if request.method == 'PUT':
         r = request.get_json()
-        response.headers.add('Access-Control-Allow-Origin', '*')
         if 'comment' in r:        
             name = r['name']
             comment = r['comment']
@@ -111,7 +108,7 @@ def location():
 
     if request.method == 'DELETE':
         r = request.get_json()
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        
         try:
             name = r['name']
             location = Locations.query.filter_by(name=name).first()
