@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 CORS(app, supports_credentials=True)
-app.config['CORS_ORIGINS'] = ['http://localhost:3000']
+app.config['CORS_ORIGINS'] = ['http://localhost:3000/']
 app.config['CORS_HEADERS'] = ['Content-Type']
 
 class Locations(db.Model):
