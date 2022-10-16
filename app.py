@@ -64,8 +64,8 @@ def show_all():
 def location():
     if request.method == 'OPTIONS':
         r = Response()
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        response.headers['Access-Control-Allow-Methods'] = ['GET,PUT,POST,DELETE']
+        r.headers['Access-Control-Allow-Origin'] = '*'
+        r.headers['Access-Control-Allow-Methods'] = ['GET,PUT,POST,DELETE']
         return r
         
     if request.method == 'GET':
