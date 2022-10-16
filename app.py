@@ -86,6 +86,10 @@ def location():
 
     if request.method == 'PUT':
         r = request.get_json()
+        response = flask.make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "*")
         if 'comment' in r:        
             name = r['name']
             comment = r['comment']
@@ -104,7 +108,7 @@ def location():
             count = location.count + 1
             Locations.query.filter_by(name=name).update({'total_rating': total_rating, 'count': count})
             db.session.commit()
-            return "Rating updated"
+            return response
 
     if request.method == 'DELETE':
         r = request.get_json()
