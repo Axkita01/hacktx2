@@ -6,7 +6,7 @@ import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("api-link")
+app.config['SQLALCHEMY_DATABASE_URI'] = str(os.environ.get("api-link"))
 db = SQLAlchemy(app)
 db.init_app(app)
 
