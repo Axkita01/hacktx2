@@ -13,7 +13,7 @@ db.init_app(app)
 CORS(app, supports_credentials=True)
 
 class Locations(db.Model):
-    name = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String(30), primary_key=True)
     description = db.Column(db.String)
     image = db.Column(db.String)
     x = db.Column(db.Float)
