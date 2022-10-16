@@ -84,12 +84,8 @@ def location():
         db.session.commit()
         return "Location added"
 
-    if request.method == 'PUT' or request.method == 'OPTIONS':
+    if request.method == 'PUT':
         r = request.get_json()
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "*")
         if 'comment' in r:        
             name = r['name']
             comment = r['comment']
@@ -108,7 +104,7 @@ def location():
             count = location.count + 1
             Locations.query.filter_by(name=name).update({'total_rating': total_rating, 'count': count})
             db.session.commit()
-            return response
+            return 'Comment Added'
 
     if request.method == 'DELETE':
         r = request.get_json()
