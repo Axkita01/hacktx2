@@ -50,7 +50,8 @@ class Locations(db.Model):
 
 with app.app_context():
     db.create_all()
-
+    
+@cross_origin(supports_credentials=True)
 @app.route("/")
 def show_all():
     return {"locations": [location.serialize for location in Locations.query.all() if location is not None]}
