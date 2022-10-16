@@ -11,7 +11,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 
 CORS(app, supports_credentials=True)
-app.config['CORS_ORIGINS'] = ['http://localhost:3000/']
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 class Locations(db.Model):
@@ -63,10 +62,11 @@ def show_all():
 @app.route('/location', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def location():
     if request.method == 'OPTIONS':
-        r = Response()
-        r.headers['Access-Control-Allow-Origin'] = '*'
-        r.headers['Access-Control-Allow-Methods'] = ['GET,PUT,POST,DELETE']
-        return r
+        response = Response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+        return response
         
     if request.method == 'GET':
         r = request.get_json()
