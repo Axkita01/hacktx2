@@ -66,6 +66,8 @@ def location():
         r = Response()
         response.headers['Access-Control-Allow-Origin'] = '*'
         response.headers['Access-Control-Allow-Methods'] = ['GET,PUT,POST,DELETE']
+        return r
+        
     if request.method == 'GET':
         r = request.get_json()
         try:
